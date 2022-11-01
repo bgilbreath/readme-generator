@@ -15,22 +15,22 @@ const questions = [ {
                     {
                     type: "input",
                     message: "What are the instructions to install your project?",
-                    title: "instructions"
+                    name: "instructions"
                     } ,
                     {
                     type: "input",
                     message: "Please explain the usage of your project.",
-                    title: "usage"
+                    name: "usage"
                     } ,
                     {    
                     type: "input",
                     message: "Who worked on this project?",
-                    title: "contributions"
+                    name: "contributions"
                     } ,
                     {
                     type: "input",
                     message: "Please provide test instructions.",
-                    title: "testing"
+                    name: "testing"
                     } ,
                 
 
@@ -38,7 +38,7 @@ const questions = [ {
                     {
                     type: "input",
                     message: "Please choose a license for your application.",
-                    title: "license"
+                    name: "license"
                     } ,
                     
 
@@ -47,20 +47,30 @@ const questions = [ {
                     {
                     type: "input",
                     message: "What is your GitHub username?",
-                    title: "github"
+                    name: "github"
                     } ,
                     
                     {
                     type: "input",
-                    message: "Please enter your email address." 
-                    title: "contact"
+                    message: "Please enter your email address.",
+                    name: "contact"
                     } ] ;
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    return inquirer.prompt(questions)
+    .then((answers)=>{
+        console.log(answers)
+        return answers
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
+}
+
 
 // Function call to initialize app
 init();
