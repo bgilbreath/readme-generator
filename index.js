@@ -1,7 +1,9 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require("inquirer");
+const MarkDown = require("./lib/ReadmeGen");
+const fs = require("fs");
 
-// TODO: Create an array of questions for user input
+// Array of questions for user input
 const questions = [ {
                     type: "input",
                     message: "What is your project's title?", 
@@ -34,7 +36,7 @@ const questions = [ {
                     } ,
                 
 
-                    /*Need to provide options*/
+                    
                     {
                     type: "input",
                     message: "Please choose a license for your application.",
@@ -55,16 +57,18 @@ const questions = [ {
                     message: "Please enter your email address.",
                     name: "contact"
                     } ] ;
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
+// Prompts question then generates ReadMe file
 function init() {
     return inquirer.prompt(questions)
-    .then((answers)=>{
-        console.log(answers)
-        return answers
+    .then((answers) => {
+        const mark = MarkDown.generateReadme(answers)
+        fs.writeFile('README.md', mark, function(err){
+            if(err){
+                console.log('Could not save file')
+            } else {
+                console.log('Success, your ReadMe file has been generated inside the current folder')
+            }
+        })
     })
     .catch((error)=>{
         console.log(error)
